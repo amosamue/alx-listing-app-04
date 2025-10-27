@@ -2,25 +2,19 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import PropertyCard from "@/components/property/PropertyCard";
 
-interface Property {
-  id: string;
-  title: string;
-  location: string;
-  price: number;
-  image: string;
-}
-
 export default function Home() {
-  const [properties, setProperties] = useState<Property[]>([]);
+  const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchProperties = async () => {
       try {
         const response = await axios.get("/api/properties");
         setProperties(response.data);
-      } catch (error) {
-        console.error("Error fetching properties:", error);
+      } catch (err) {
+        console.error("Error fetching properties:", err);
+        setError("Failed to load properties.");
       } finally {
         setLoading(false);
       }
@@ -29,12 +23,12 @@ export default function Home() {
     fetchProperties();
   }, []);
 
-  if (loading) return <p>Loading...</p>;
-
-  if (!properties || properties.length === 0) return <p>No properties available.</p>;
+  if (loading) return <p>Loading properties...</p>;
+  if (error) return <p className="text-red-500">{error}</p>;
+  if (!properties.length) return <p>No properties available.</p>;
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4">
+    <div className="grid grid-cols-3 gap-4">
       {properties.map((property) => (
         <PropertyCard key={property.id} property={property} />
       ))}

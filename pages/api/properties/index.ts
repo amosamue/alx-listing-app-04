@@ -1,29 +1,29 @@
-import type { NextApiRequest, NextApiResponse } from "next";
-
-const properties = [
-  {
-    id: "1",
-    title: "Cozy Apartment in Accra",
-    location: "Accra, Ghana",
-    price: 120,
-    image: "/images/properties/cozy-apartment.jpg",
-  },
-  {
-    id: "2",
-    title: "Luxury Villa",
-    location: "Tema, Ghana",
-    price: 300,
-    image: "/images/properties/luxury-villa.jpg",
-  },
-  {
-    id: "3",
-    title: "Beachfront Bungalow",
-    location: "Cape Coast, Ghana",
-    price: 200,
-    image: "/images/properties/beachfront-bungalow.jpg",
-  },
-];
-
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
+export default function handler(req, res) {
+  const properties = [
+    {
+      id: 1,
+      name: "Cozy Apartment in Accra",
+      description: "A cozy apartment in the heart of Accra.",
+      location: "Accra, Ghana",
+      price: 120,
+      image: "/images/properties/accra-apartment.jpg",
+    },
+    {
+      id: 2,
+      name: "Luxury Villa",
+      description: "A luxurious villa with modern amenities.",
+      location: "Tema, Ghana",
+      price: 300,
+      image: "/images/properties/luxury-villa.jpg",
+    },
+    {
+      id: 3,
+      name: "Beachfront Bungalow",
+      description: "A beautiful bungalow right on the beach.",
+      location: "Cape Coast, Ghana",
+      price: 200,
+      image: "/images/properties/beach-bungalow.jpg",
+    },
+  ];
   res.status(200).json(properties);
 }

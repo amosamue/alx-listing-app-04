@@ -1,26 +1,20 @@
-interface PropertyDetailProps {
-  property: {
-    id: string;
-    title: string;
-    description: string;
-    price: number;
-    images: string[];
-    location: string;
-  };
-}
+import ReviewSection from "./ReviewSection";
 
-export default function PropertyDetail({ property }: PropertyDetailProps) {
+export default function PropertyDetail({ property }) {
   return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold">{property.title}</h1>
-      <p>{property.description}</p>
-      <p className="font-semibold">Price: ${property.price}</p>
-      <p>Location: {property.location}</p>
-      <div className="grid grid-cols-3 gap-2 mt-4">
-        {property.images.map((img, index) => (
-          <img key={index} src={img} alt={property.title} className="rounded" />
-        ))}
-      </div>
+    <div className="max-w-4xl mx-auto p-4">
+      <img
+        src={property.image}
+        alt={property.name}
+        className="w-full h-96 object-cover rounded"
+      />
+      <h1 className="text-3xl font-bold mt-4">{property.name}</h1>
+      <p className="text-gray-700 mt-2">{property.description}</p>
+      <p className="text-gray-500 mt-1">{property.location}</p>
+      <p className="text-green-600 font-semibold mt-2">${property.price}</p>
+
+      <h2 className="text-2xl font-bold mt-6">Reviews</h2>
+      <ReviewSection propertyId={property.id} />
     </div>
   );
 }
